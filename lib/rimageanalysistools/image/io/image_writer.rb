@@ -43,9 +43,9 @@ module RImageAnalysisTools
 
       wr = ImageWriter.new
 
-      m = an_image.getMetadata
+      m = image_to_write.getMetadata
 
-      pixels = an_image.getPixelData
+      pixels = image_to_write.getPixelData
 
       pixel_array = pixels.toImagePlus.getProcessor.getPixels
 
