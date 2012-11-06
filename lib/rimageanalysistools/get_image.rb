@@ -37,6 +37,19 @@ module RImageAnalysisTools
     ir.read(filename)
         
   end
+
+  def self.read_image_directory(dirname)
+
+    ir = ImageReader.new
+
+    images = []
+
+    Dir.foreach(dirname) do |f|
+
+      images << ir.read(File.expand_path(f, dirname))
   
-  
+    end
+    
+  end
+
 end
