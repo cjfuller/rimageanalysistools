@@ -29,22 +29,27 @@ require 'rimageanalysistools/method/method'
 
 java_import Java::edu.stanford.cfuller.imageanalysistools.image.ImageFactory
 java_import Java::edu.stanford.cfuller.imageanalysistools.metric.IntensityPerPixelMetric
+java_import Java::edu.stanford.cfuller.imageanalysistools.filter.LocalMaximumSeparabilityThresholdingFilter
+java_import Java::edu.stanford.cfuller.imageanalysistools.filter.LabelFilter
+java_import Java::edu.stanford.cfuller.imageanalysistools.filter.RecursiveMaximumSeparabilityFilter
+java_import Java::edu.stanford.cfuller.imageanalysistools.filter.RelabelFilter
+java_import Java::edu.stanford.cfuller.imageanalysistools.filter.SizeAbsoluteFilter
+java_import Java::edu.stanford.cfuller.imageanalysistools.filter.RenormalizationFilter
+java_import Java::edu.stanford.cfuller.imageanalysistools.filter.BandpassFilter
 
 module RImageAnalysisTools
 
   class CentromereFindingMethod < Method
-
-    include_package "edu.stanford.cfuller.imageanalysistools.filter"
   
     def centromere_finding(im)
 
       im = ImageFactory.createWritable(im)
 
-      filter = []
+      filters = []
 
       filters << LocalMaximumSeparabilityThresholdingFilter.new
       filters << LabelFilter.new
-      filters << RecursiveMaximumSeparabilityThresholdingFilter.new
+      filters << RecursiveMaximumSeparabilityFilter.new
       filters << RelabelFilter.new
       filters << SizeAbsoluteFilter.new
       filters << RelabelFilter.new
@@ -78,7 +83,7 @@ module RImageAnalysisTools
 
       bf = BandpassFilter.new
       
-      br.setParameters(parameters)
+      bf.setParameters(parameters)
 
       band_lower = 3.0
       band_upper = 4.0
@@ -87,7 +92,7 @@ module RImageAnalysisTools
 
       bf.apply(mask)
 
-      centromere_finding(mask)
+      mask = centromere_finding(mask)
 
       m = IntensityPerPixelMetric.new
 

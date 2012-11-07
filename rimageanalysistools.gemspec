@@ -4,7 +4,7 @@ require 'open-uri'
 jar_path = "extlib"
 Dir.mkdir(jar_path) unless Dir.exist?(jar_path)
 jar_filename = "ImageAnalysisTools.jar"
-jar_url = "http://cloud.github.com/downloads/cjfuller/imageanalysistools/ImageAnalysisTools_5.1.1_standalone.jar"
+jar_url = "https://buildhive.cloudbees.com/job/cjfuller/job/imageanalysistools/lastSuccessfulBuild/artifact/dist/ImageAnalysisTools_dev_standalone.jar"
 
 File::open(File.expand_path(jar_filename, jar_path), 'wb') do |of|
 
