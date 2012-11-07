@@ -32,10 +32,10 @@ java_import Java::edu.stanford.cfuller.imageanalysistools.metric.IntensityPerPix
 
 module RImageAnalysisTools
 
-  include_package "edu.stanford.cfuller.imageanalysistools.filter"
-  
   class CentromereFindingMethod < Method
 
+    include_package "edu.stanford.cfuller.imageanalysistools.filter"
+  
     def centromere_finding(im)
 
       im = ImageFactory.createWritable(im)
