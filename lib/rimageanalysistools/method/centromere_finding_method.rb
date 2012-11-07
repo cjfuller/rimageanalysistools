@@ -52,7 +52,7 @@ module RImageAnalysisTools
       filters.each do |f|
 
         f.setParameters(parameters)
-        f.setReferenceImage(input_images.reference)
+        f.setReferenceImage(input_images.getMarkerImage)
         f.apply(im)
 
       end
@@ -72,7 +72,7 @@ module RImageAnalysisTools
 
     def go
       
-      mask = ImageFactory.createWritable(input_images.reference)
+      mask = ImageFactory.createWritable(input_images.getMarkerImage)
 
       normalize_input_image(mask)
 
