@@ -26,7 +26,7 @@
 
 require 'rimageanalysistools/initjava'
 
-java_import Java::edu.stanford.cfuller.imageanalysistools.meta.ParameterDictionary
+java_import Java::edu.stanford.cfuller.imageanalysistools.meta.parameters.ParameterDictionary
 
 class ParameterDictionary
 
