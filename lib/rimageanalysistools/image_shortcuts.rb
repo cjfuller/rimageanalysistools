@@ -24,49 +24,41 @@
 #  * ***** END LICENSE BLOCK ***** */
 #++
 
-require 'rimageanalysistools'
-require 'rimageanalysistools/image_shortcuts'
+require 'rimageanalysistools/initjava'
 
+java_import Java::edu.stanford.cfuller.imageanalysistools.image.ReadOnlyImageImpl
+java_import Java::edu.stanford.cfuller.imageanalysistools.image.WritableImageImpl
 java_import Java::edu.stanford.cfuller.imageanalysistools.image.ImageCoordinate
 
-module RImageAnalysisTools
+class ReadOnlyImageImpl
 
-  class Centroids
+  def [](ic)
+    getValue(ic)
+  end
+  
+end
 
-    def self.calculate_centroids_2d(mask)
+class WritableImageImpl
 
-      centroids = {}
-      counts = {}
-
-      mask.each do |ic|
-
-        next unless mask[ic] > 0
-
-        unless centroids[mask[ic]] then
-          
-          centroids[mask[ic]]= [0.0,0.0]
-          counts[mask[ic]]= 0
-
-        end
-
-        centroids[mask[ic]][0]+= ic.get(ImageCoordinate::X)
-        centroids[mask[ic]][1]+= ic.get(ImageCoordinate::Y)
-
-        counts[mask[ic]]+= 1
-
-      end
-
-      centroids.each_key do |k|
-
-        centroids[k].map! { |e| e/counts[k] }
-
-      end
-
-      centroids
-
-    end
-
+  def []=(ic, value)
+    setValue(ic, value)
   end
 
 end
+
+class ImageCoordinate
+
+  Lookups = {x: X, y: Y, z: Z, c: Z, t: T}
+
+  def [](dim)
+    get(Lookups[dim])
+  end
+
+  def []=(dim, value)
+    set(Lookups[dim], value)
+  end
+
+end
+
+
 
