@@ -58,6 +58,12 @@ class ImageCoordinate
     set(Lookups[dim], value)
   end
 
+  def self.[](*values)
+
+    createCoordXYZCT(*values)
+
+  end
+
 end
 
 

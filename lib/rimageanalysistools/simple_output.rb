@@ -50,7 +50,7 @@ module RImageAnalysisTools
 
     unless quant.nil? then
 
-      quant_str = LocalAnalysis.generateDataOutputString(quant, params)
+      quant_str = LocalAnalysis.generateDataOutputString(quant, nil)
 
       File.open(File.expand_path(quant_fn, quant_dir), 'w') do |f|
         f.puts quant_str
