@@ -24,6 +24,6 @@ This will load the ImageAnalysisTools library and a few basic convenience method
 
 ## License
 
-RImageAnalysisTools is licensed under the MIT/X11 licence (see LICENSE file for exact text).  Dependencies of the ImageAnalysisTools library may use separate licenses.  See the [license information](https://github.com/cjfuller/imageanalysistools/tree/master/LICENSES) in the ImageAnalysisTools repository for more information.
+RImageAnalysisTools is licensed under the MIT/X11 license (see LICENSE file for exact text).  Dependencies of the ImageAnalysisTools library may use separate licenses.  See the [license information](https://github.com/cjfuller/imageanalysistools/tree/master/LICENSES) in the ImageAnalysisTools repository for more information.
 
 
