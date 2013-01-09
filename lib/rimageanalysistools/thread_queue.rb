@@ -41,11 +41,13 @@ module RImageAnalysisTools
       @mut = Mutex.new
       @max_threads = 4
       @running = false
+      @results = []
     end
     
     attr_reader :running
 
     def enqueue(&b)
+
       @mut.synchronize do
         @waiting << b
       end
@@ -60,11 +62,11 @@ module RImageAnalysisTools
       
       Thread.new do 
         
-        while (not empty?) do
+        until empty? do
           
           run_thread_if_space
         
-          sleep 0.5
+          sleep 0.2
         
         end
         
@@ -98,16 +100,20 @@ module RImageAnalysisTools
       end
 
       @mut.synchronize do
-        dead.each {|d| @threads.delete(d)}
+        dead.each do |d|
+          @results << d.value
+          @threads.delete(d)
+        end
       end
                   
     end
 
     def finish
-      while @threads.length > 0
+      until empty? do
         remove_completed_threads
-        sleep 1
+        sleep 0.5
       end
+      results 
     end
 
 
