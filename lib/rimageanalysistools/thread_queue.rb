@@ -79,7 +79,7 @@ module RImageAnalysisTools
     def run_thread_if_space
       
       @mut.synchronize do 
-        while (not @threads.size == @max_threads) and (not @waiting.empty?) do
+        while (not @threads.size >= @max_threads) and (not @waiting.empty?) do
           next_task = @waiting.pop
           @threads << Thread.new(next_task) do |task| 
             task.call
@@ -113,7 +113,7 @@ module RImageAnalysisTools
         remove_completed_threads
         sleep 0.5
       end
-      results 
+      @results 
     end
 
 
