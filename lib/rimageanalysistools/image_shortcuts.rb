@@ -48,7 +48,7 @@ end
 
 class ImageCoordinate
 
-  Lookups = {x: X, y: Y, z: Z, c: Z, t: T}
+  Lookups = {x: X, y: Y, z: Z, c: C, t: T}
 
   def [](dim)
     get(Lookups[dim])
