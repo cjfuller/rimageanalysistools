@@ -8,11 +8,9 @@ Requires [JRuby](http://jruby.org) (since the library it depends on is written i
 
 ## Installation
 
-`gem build rimageanalysistools.gemspec`
+`gem install rimageanalysistools`
 
-`gem install rimageanalysistools-[version]-java.gem`
-
-This will fetch the latest build of the ImageAnalysisTools library and any required dependencies automatically.
+This will fetch the gem from the latest version from rubygems.org.
 
 ## Usage
 
