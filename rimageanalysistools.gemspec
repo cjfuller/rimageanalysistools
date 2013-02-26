@@ -4,7 +4,7 @@ require 'open-uri'
 
 JAR_PATH = "extlib"
 JAR_FILENAME = "ImageAnalysisTools.jar"
-JAR_URL = "https://buildhive.cloudbees.com/job/cjfuller/job/imageanalysistools/lastSuccessfulBuild/artifact/target/imageanalysistools-5.1.3_dev-standalone.jar"
+JAR_URL = "https://buildhive.cloudbees.com/job/cjfuller/job/imageanalysistools/lastSuccessfulBuild/artifact/target/imageanalysistools-5.1.4_dev-standalone.jar"
 
 puts "downloading the current ImageAnalysisTools build from #{JAR_URL}"
 
@@ -22,7 +22,7 @@ end
 Gem::Specification.new do |s|
 
   s.name        = 'rimageanalysistools'
-  s.version     = '5.1.2.1'
+  s.version     = '5.1.3.1'
   s.date        = '2013-01-25'
   s.summary     = "JRuby extensions to the ImageAnalysisTools java package"
   s.description = "Helper code and some extensions for the ImageAnalysisTools package at http://cjfuller.github.com/imageanalysistools/"
