@@ -31,8 +31,20 @@ java_import Java::edu.stanford.cfuller.imageanalysistools.image.ImageCoordinate
 
 module RImageAnalysisTools
 
-  class Centroids
+  ##
+  # Methods for calculating the geometric centroids of regions in an image
+  #
+  module Centroids
 
+    ##
+    # Calculates the centroid of all 2d regions in a mask.  A region is
+    # defined as all pixels having the same nonzero greylevel in an image.
+    #
+    # @param [Image] mask the mask containing the regions
+    #
+    # @return [Hash] a hash mapping the greylevel of each region to its
+    #  2d centroid stored as an array [x,y]
+    #
     def self.calculate_centroids_2d(mask)
 
       centroids = {}

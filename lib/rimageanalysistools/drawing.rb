@@ -31,6 +31,21 @@ java_import Java::edu.stanford.cfuller.imageanalysistools.image.ReadOnlyImageImp
 
 class ReadOnlyImageImpl
 
+  ##
+  # Allows setting a region of interest of an image along only some dimenions, preserving any
+  # current region of interest along other dimenions.
+  #
+  # @param [Hash, ImageCoordinate] lower a hash or ImageCoordinate mapping dimensions to the lower
+  #  bound of the box (inclusive) along the specified dimensions.  Can contain extra dimenions not boxed;
+  #  only the boxing on the dimenions specified in the dims parameter will be changed.
+  # @param [Hash, ImageCoordinate] upper a hash or ImageCoordinate mapping dimensions to the upper
+  #  bound of the box (exclusive) along the specified dimensions.  Can contain extra dimenions not boxed;
+  #  only the boxing on the dimenions specified in the dims parameter will be changed.
+  # @param [Enumerable] dims an enumeration of the dimensions to be boxed (these should be the symbol shortcuts
+  #  to the dimensions; e.g. :x, :y)
+  #
+  # @return [void]
+  #
   def box_conservative(lower, upper, dims)
 
     low_curr = nil
@@ -57,10 +72,27 @@ class ReadOnlyImageImpl
 
 end
 
+
 module RImageAnalysisTools
 
+
+  ##
+  # A collection of methods for drawing into an existing image.
+  #
   class Drawing
 
+    ##
+    # A basic drawing method that iterates through an entire image.  At each coordinate,
+    # an attached block is evaluated for a boolean response that determines whether that
+    # coordinate is overwritten with a specified value.  The attached block will be given
+    # a single parameter, which is the current ImageCoordinate.
+    #
+    # @param [WritableImage] im the image being drawn on
+    # @param [Numeric] draw_value the value to which a pixel will be set if the block
+    #  evaluates to a true value at that coordinate
+    #
+    # @return [void]
+    #
     def draw(im, draw_value = 255.0)
 
       im.each do |ic|
@@ -75,6 +107,19 @@ module RImageAnalysisTools
 
     end
     
+    ##
+    # Draws a specified shape into an image.
+    # 
+    # @param [WritableImage] im the image into which to draw
+    # @param [Array] location an array containing the coordinates of the shape to draw.
+    #  The exact meaning of this parameter depends on which shape is being drawn.
+    # @param [Symbol] shape_name the name of the shape to draw.  This should correspond
+    #  to one of the methods of this class.
+    # @param shape_parameters the parameters for drawing the specified shape;
+    #  the meaning of this parameter depends on the shape.
+    #
+    # @return [void]
+    #
     def draw_shape(im, location, shape_name=:circle, shape_parameters= 10)
 
       if self.respond_to?(shape_name) then
@@ -85,6 +130,15 @@ module RImageAnalysisTools
 
     end
     
+    ##
+    # Draws a circle into an image.
+    #
+    # @param [WritableImage] im the image into which to draw
+    # @param [Array] center an array containing the x,y coordinates of the circle's center
+    # @param [Numeric] radius the radius of the circle in pixels
+    #
+    # @return [void]
+    #
     def circle(im, center, radius)
 
       lower = ImageCoordinate[center[0]-radius-1, center[1]-radius-1, 0,0,0]
@@ -110,6 +164,18 @@ module RImageAnalysisTools
         
     end
 
+    ##
+    # Draws an ellipse into an image.
+    #
+    # @param [WritableImage] im the image into which to draw
+    # @param [Array] foci an array containing two arrays, each of which contains the x,y
+    #  coordinates of one focus of the ellipse
+    # @param [Numeric] radius_inc the extra amount of distance (in pixels) beyond the
+    #  distance between the foci that the ellipse should be drawn.  (2*radius_inc + dist
+    #  between foci = major axis length)
+    #
+    # @return [void]
+    #
     def ellipse(im, foci, radius_inc)
 
       min_x = foci[0][0]

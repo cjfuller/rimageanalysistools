@@ -30,10 +30,25 @@ java_import Java::edu.stanford.cfuller.imageanalysistools.meta.parameters.Parame
 
 class ParameterDictionary
 
+  ##
+  # Adds hash-like getter access to ParameterDictionary objects
+  #
+  # @param key an object whose to_s method returns the name of a parameter
+  # 
+  # @return [String] the value of the parameter as returned by ParameterDictionary#getValueForKey
+  #
   def [](key)
     getValueForKey(key.to_s)
   end
 
+  ##
+  # Adds hash-like setter access to ParameterDictionary objects
+  #
+  # @param key an object whose to_s method returns the name of a parameter
+  # @param value an object whose to_s method returns the parameter value being set
+  # 
+  # @return [void]
+  #
   def []=(key, value)
     setValueForKey(key.to_s, value.to_s)
   end
@@ -42,7 +57,13 @@ end
 
 module RImageAnalysisTools
 
-
+  ##
+  # Creates a ParameterDictionary from a hash of parameters.
+  #
+  # @param [Hash] parameter_hash a hash mapping parameters to values
+  #
+  # @return [ParameterDictionary] a parameter dictionary now containing the specified parameters
+  #
   def self.create_parameter_dictionary(parameter_hash)
 
     p = ParameterDictionary.emptyDictionary
