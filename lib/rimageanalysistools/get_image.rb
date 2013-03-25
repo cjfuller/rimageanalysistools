@@ -25,14 +25,22 @@
 #++
 
 require 'rimageanalysistools/initjava'
+require 'rimageanalysistools/image/io/url_image_reader'
+require 'uri'
 
 java_import Java::edu.stanford.cfuller.imageanalysistools.image.io.ImageReader
 
 module RImageAnalysisTools
     
   def self.get_image(filename)
-    
-    ir = ImageReader.new
+
+    ir = nil
+
+    if filename.is_a? URI then
+      ir = URLImageReader.new
+    else
+      ir = ImageReader.new
+    end
     
     ir.read(filename)
         
