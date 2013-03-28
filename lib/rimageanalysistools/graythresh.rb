@@ -51,6 +51,8 @@ module RImageAnalysisTools
 
     mu = 0
 
+    return min if step_size == 0
+
     min.step(max, step_size) do |k|
 
       last_count_upto_k = counts_upto_k
