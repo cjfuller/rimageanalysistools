@@ -24,7 +24,7 @@ end
 Gem::Specification.new do |s|
 
   s.name        = 'rimageanalysistools'
-  s.version     = '5.1.4.1'
+  s.version     = '5.1.4.2'
   s.date        = '2013-01-25'
   s.summary     = "JRuby extensions to the ImageAnalysisTools java package"
   s.description = "Helper code and some extensions for the ImageAnalysisTools package at http://cjfuller.github.com/imageanalysistools/"
