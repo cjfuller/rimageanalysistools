@@ -1,0 +1,6 @@
+.rbx
+.rspec
+.yardoc
+extlib
+doc
+*.gem
