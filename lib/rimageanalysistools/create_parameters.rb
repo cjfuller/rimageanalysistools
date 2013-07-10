@@ -35,10 +35,16 @@ class ParameterDictionary
   #
   # @param key an object whose to_s method returns the name of a parameter
   # 
-  # @return [String] the value of the parameter as returned by ParameterDictionary#getValueForKey
+  # @return [String, Boolean] the value of the parameter as returned by ParameterDictionary#getValueForKey or a boolean if it's a boolean parameter
   #
   def [](key)
-    getValueForKey(key.to_s)
+    val = getValueForKey(key.to_s)
+    if val and val.downcase == "true"
+      return true
+    elsif val and val.downcase == "false" then
+      return false
+    end
+    return val
   end
 
   ##
